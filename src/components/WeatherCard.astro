@@ -1,0 +1,264 @@
+---
+import type { WeatherData } from '../lib/weather';
+import { weatherThemes } from '../lib/weatherThemes';
+
+interface Props {
+  weather: WeatherData;
+}
+
+const { weather } = Astro.props;
+const theme = weatherThemes[weather.weatherCode];
+---
+
+<div class="weather-card" data-weather={weather.weatherCode}>
+  <div class="location">{weather.location}</div>
+
+  <div class="main-info">
+    <svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <Fragment set:html={theme.icon} />
+    </svg>
+    <div class="temperature">{weather.temperature}°</div>
+  </div>
+
+  <div class="condition">{weather.condition}</div>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-header">
+        <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+        </svg>
+        <span class="metric-label">HUMEDAD</span>
+      </div>
+      <div class="metric-value">{weather.humidity}%</div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-header">
+        <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
+        </svg>
+        <span class="metric-label">VIENTO</span>
+      </div>
+      <div class="metric-value">{weather.wind} km/h</div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-header">
+        <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/>
+        </svg>
+        <span class="metric-label">SENSACIÓN</span>
+      </div>
+      <div class="metric-value">{weather.feelsLike}°</div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-header">
+        <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+        </svg>
+        <span class="metric-label">LLUVIA</span>
+      </div>
+      <div class="metric-value">{weather.rain}%</div>
+    </div>
+  </div>
+</div>
+
+<style define:vars={{ iconColor: theme.iconColor }}>
+  .weather-card {
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(51, 65, 85, 0.5);
+    border-radius: 24px;
+    padding: 48px;
+    max-width: 480px;
+    width: 100%;
+    backdrop-filter: blur(10px);
+  }
+
+  .weather-card[data-weather="sunny"] {
+    background: rgba(254, 243, 199, 0.15);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+  }
+
+  .weather-card[data-weather="snowy"] {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(186, 230, 253, 0.4);
+  }
+
+  .weather-card[data-weather="stormy"] {
+    background: rgba(30, 27, 75, 0.5);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+  }
+
+  .weather-card[data-weather="cloudy"] {
+    background: rgba(51, 65, 85, 0.6);
+    border: 1px solid rgba(100, 116, 139, 0.4);
+  }
+
+  .weather-card[data-weather="foggy"] {
+    background: rgba(107, 114, 128, 0.5);
+    border: 1px solid rgba(156, 163, 175, 0.4);
+  }
+
+  .location {
+    color: rgba(203, 213, 225, 0.9);
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 32px;
+    letter-spacing: 0.5px;
+  }
+
+  .weather-card[data-weather="sunny"] .location,
+  .weather-card[data-weather="snowy"] .location {
+    color: rgba(30, 41, 59, 0.9);
+  }
+
+  .main-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .weather-icon {
+    width: 80px;
+    height: 80px;
+    color: var(--iconColor);
+  }
+
+  .temperature {
+    font-size: 96px;
+    font-weight: 300;
+    color: #ffffff;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+
+  .weather-card[data-weather="sunny"] .temperature,
+  .weather-card[data-weather="snowy"] .temperature {
+    color: rgba(15, 23, 42, 0.95);
+  }
+
+  .condition {
+    text-align: center;
+    color: rgba(203, 213, 225, 0.8);
+    font-size: 15px;
+    margin-bottom: 48px;
+  }
+
+  .weather-card[data-weather="sunny"] .condition,
+  .weather-card[data-weather="snowy"] .condition {
+    color: rgba(30, 41, 59, 0.8);
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .metric-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(51, 65, 85, 0.4);
+    border-radius: 16px;
+    padding: 20px;
+  }
+
+  .weather-card[data-weather="sunny"] .metric-card {
+    background: rgba(254, 243, 199, 0.3);
+    border: 1px solid rgba(251, 191, 36, 0.2);
+  }
+
+  .weather-card[data-weather="snowy"] .metric-card {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(186, 230, 253, 0.3);
+  }
+
+  .weather-card[data-weather="stormy"] .metric-card {
+    background: rgba(30, 27, 75, 0.4);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+  }
+
+  .weather-card[data-weather="cloudy"] .metric-card {
+    background: rgba(51, 65, 85, 0.5);
+    border: 1px solid rgba(100, 116, 139, 0.3);
+  }
+
+  .weather-card[data-weather="foggy"] .metric-card {
+    background: rgba(107, 114, 128, 0.4);
+    border: 1px solid rgba(156, 163, 175, 0.3);
+  }
+
+  .metric-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .metric-icon {
+    width: 18px;
+    height: 18px;
+    color: rgba(148, 163, 184, 0.8);
+  }
+
+  .weather-card[data-weather="sunny"] .metric-icon,
+  .weather-card[data-weather="snowy"] .metric-icon {
+    color: rgba(71, 85, 105, 0.8);
+  }
+
+  .metric-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(148, 163, 184, 0.8);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  .weather-card[data-weather="sunny"] .metric-label,
+  .weather-card[data-weather="snowy"] .metric-label {
+    color: rgba(71, 85, 105, 0.8);
+  }
+
+  .metric-value {
+    font-size: 28px;
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+  }
+
+  .weather-card[data-weather="sunny"] .metric-value,
+  .weather-card[data-weather="snowy"] .metric-value {
+    color: rgba(15, 23, 42, 0.95);
+  }
+
+  @media (max-width: 600px) {
+    .weather-card {
+      padding: 32px 24px;
+    }
+
+    .temperature {
+      font-size: 72px;
+    }
+
+    .weather-icon {
+      width: 64px;
+      height: 64px;
+    }
+
+    .metrics-grid {
+      gap: 12px;
+    }
+
+    .metric-card {
+      padding: 16px;
+    }
+
+    .metric-value {
+      font-size: 24px;
+    }
+  }
+</style>

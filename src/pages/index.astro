@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WeatherCard from '../components/WeatherCard.astro';
+import { getWeatherData } from '../lib/weather';
+import { weatherThemes } from '../lib/weatherThemes';
+
+const weather = await getWeatherData();
+const theme = weatherThemes[weather.weatherCode];
+---
+
+<Layout>
+  <main style={`background: ${theme.background}`}>
+    <WeatherCard weather={weather} />
+  </main>
+</Layout>
+
+<style>
+  main {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    transition: background 0.6s ease;
+  }
+</style>

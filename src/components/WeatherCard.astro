@@ -23,7 +23,7 @@ const theme = weatherThemes[weather.weather];
     >
       <Fragment set:html={theme.icon} />
     </svg>
-    <div class="temperature">{weather.temperature}°</div>
+    <div class="temperature">{weather.temperature.toFixed(1)}°</div>
   </div>
 
   <div class="metrics-grid">
@@ -58,7 +58,7 @@ const theme = weatherThemes[weather.weather];
         </svg>
         <span class="metric-label">VIENTO</span>
       </div>
-      <div class="metric-value">{weather.wind} km/h</div>
+      <div class="metric-value">{weather.wind.toFixed(1)} km/h</div>
     </div>
 
     <div class="metric-card">

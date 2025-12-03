@@ -10,7 +10,9 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/vercel": "^9.0.2",
     "astro": "^5.2.5",
+    "openmeteo": "^1.2.3",
     "zod": "^3.25.76"
   }
 }

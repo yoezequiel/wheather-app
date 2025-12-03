@@ -1,10 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import WeatherCard from '../components/WeatherCard.astro';
-import { getWeatherData } from '../lib/weather';
-import { weatherThemes } from '../lib/weatherThemes';
+import Layout from "../layouts/Layout.astro";
+import WeatherCard from "../components/WeatherCard.astro";
+import { getWeatherData } from "../lib/weather";
+import { weatherThemes } from "../lib/weatherThemes";
 
-const weather = await getWeatherData();
+const weather = await getWeatherData(Astro.clientAddress);
 const theme = weatherThemes[weather.weather];
 ---
 

@@ -25,9 +25,12 @@ type ApiResponseSchema = z.infer<typeof apiResponseSchema>;
 export async function getCoordinatesByIpAdrress(ip: string): Promise<ApiResponseSchema> {
     if (isIP(ip) == 0) throw new InvalidIpAddress(ip);
 
-    const response = await fetch(`${IP_API_KEY}/${ip}?token=${IP_API_KEY}`);
+    const response = await fetch(`${IP_API_URL}/${ip}?token=${IP_API_KEY}`);
 
     const data = await response.json();
+
+    console.log(data);
+    console.log("---------------------");
 
     return apiResponseSchema.parse(data);
 }

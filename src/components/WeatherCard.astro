@@ -1,6 +1,6 @@
 ---
-import type { WeatherData } from '../lib/weather';
-import { weatherThemes } from '../lib/weatherThemes';
+import type { WeatherData } from "../lib/weather";
+import { weatherThemes } from "../lib/weatherThemes";
 
 interface Props {
   weather: WeatherData;
@@ -14,19 +14,29 @@ const theme = weatherThemes[weather.weather];
   <div class="location">{weather.location}</div>
 
   <div class="main-info">
-    <svg class="weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <svg
+      class="weather-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+    >
       <Fragment set:html={theme.icon} />
     </svg>
     <div class="temperature">{weather.temperature}°</div>
   </div>
 
-  <div class="condition">{weather.condition}</div>
-
   <div class="metrics-grid">
     <div class="metric-card">
       <div class="metric-header">
-        <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+        <svg
+          class="metric-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
         </svg>
         <span class="metric-label">HUMEDAD</span>
       </div>
@@ -35,8 +45,16 @@ const theme = weatherThemes[weather.weather];
 
     <div class="metric-card">
       <div class="metric-header">
-        <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
+        <svg
+          class="metric-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"
+          ></path>
         </svg>
         <span class="metric-label">VIENTO</span>
       </div>
@@ -45,18 +63,14 @@ const theme = weatherThemes[weather.weather];
 
     <div class="metric-card">
       <div class="metric-header">
-        <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/>
-        </svg>
-        <span class="metric-label">SENSACIÓN</span>
-      </div>
-      <div class="metric-value">{weather.feelsLike}°</div>
-    </div>
-
-    <div class="metric-card">
-      <div class="metric-header">
-        <svg class="metric-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+        <svg
+          class="metric-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
         </svg>
         <span class="metric-label">LLUVIA</span>
       </div>

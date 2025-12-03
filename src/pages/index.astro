@@ -5,7 +5,7 @@ import { getWeatherData } from '../lib/weather';
 import { weatherThemes } from '../lib/weatherThemes';
 
 const weather = await getWeatherData();
-const theme = weatherThemes[weather.weatherCode];
+const theme = weatherThemes[weather.weather];
 ---
 
 <Layout>

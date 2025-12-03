@@ -7,10 +7,10 @@ interface Props {
 }
 
 const { weather } = Astro.props;
-const theme = weatherThemes[weather.weatherCode];
+const theme = weatherThemes[weather.weather];
 ---
 
-<div class="weather-card" data-weather={weather.weatherCode}>
+<div class="weather-card" data-weather={weather.weather}>
   <div class="location">{weather.location}</div>
 
   <div class="main-info">
@@ -76,29 +76,51 @@ const theme = weatherThemes[weather.weatherCode];
     backdrop-filter: blur(10px);
   }
 
-  .weather-card[data-weather="sunny"] {
+  .weather-card[data-weather="Clear"] {
     background: rgba(254, 243, 199, 0.15);
     border: 1px solid rgba(251, 191, 36, 0.3);
   }
 
-  .weather-card[data-weather="snowy"] {
+  .weather-card[data-weather="Snow"],
+  .weather-card[data-weather="Sleet"],
+  .weather-card[data-weather="Hail"] {
     background: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(186, 230, 253, 0.4);
   }
 
-  .weather-card[data-weather="stormy"] {
+  .weather-card[data-weather="Thunderstorm"] {
     background: rgba(30, 27, 75, 0.5);
     border: 1px solid rgba(139, 92, 246, 0.3);
   }
 
-  .weather-card[data-weather="cloudy"] {
+  .weather-card[data-weather="Cloudy"] {
     background: rgba(51, 65, 85, 0.6);
     border: 1px solid rgba(100, 116, 139, 0.4);
   }
 
-  .weather-card[data-weather="foggy"] {
+  .weather-card[data-weather="Fog"] {
     background: rgba(107, 114, 128, 0.5);
     border: 1px solid rgba(156, 163, 175, 0.4);
+  }
+
+  .weather-card[data-weather="Haze"] {
+    background: rgba(168, 162, 158, 0.4);
+    border: 1px solid rgba(120, 113, 108, 0.4);
+  }
+
+  .weather-card[data-weather="Dust"] {
+    background: rgba(217, 119, 6, 0.2);
+    border: 1px solid rgba(180, 83, 9, 0.3);
+  }
+
+  .weather-card[data-weather="Shower"] {
+    background: rgba(3, 105, 161, 0.4);
+    border: 1px solid rgba(7, 89, 133, 0.4);
+  }
+
+  .weather-card[data-weather="Drizzle"] {
+    background: rgba(51, 65, 85, 0.7);
+    border: 1px solid rgba(71, 85, 105, 0.4);
   }
 
   .location {
@@ -110,8 +132,11 @@ const theme = weatherThemes[weather.weatherCode];
     letter-spacing: 0.5px;
   }
 
-  .weather-card[data-weather="sunny"] .location,
-  .weather-card[data-weather="snowy"] .location {
+  .weather-card[data-weather="Clear"] .location,
+  .weather-card[data-weather="Snow"] .location,
+  .weather-card[data-weather="Sleet"] .location,
+  .weather-card[data-weather="Hail"] .location,
+  .weather-card[data-weather="Dust"] .location {
     color: rgba(30, 41, 59, 0.9);
   }
 
@@ -137,8 +162,11 @@ const theme = weatherThemes[weather.weatherCode];
     letter-spacing: -2px;
   }
 
-  .weather-card[data-weather="sunny"] .temperature,
-  .weather-card[data-weather="snowy"] .temperature {
+  .weather-card[data-weather="Clear"] .temperature,
+  .weather-card[data-weather="Snow"] .temperature,
+  .weather-card[data-weather="Sleet"] .temperature,
+  .weather-card[data-weather="Hail"] .temperature,
+  .weather-card[data-weather="Dust"] .temperature {
     color: rgba(15, 23, 42, 0.95);
   }
 
@@ -149,8 +177,11 @@ const theme = weatherThemes[weather.weatherCode];
     margin-bottom: 48px;
   }
 
-  .weather-card[data-weather="sunny"] .condition,
-  .weather-card[data-weather="snowy"] .condition {
+  .weather-card[data-weather="Clear"] .condition,
+  .weather-card[data-weather="Snow"] .condition,
+  .weather-card[data-weather="Sleet"] .condition,
+  .weather-card[data-weather="Hail"] .condition,
+  .weather-card[data-weather="Dust"] .condition {
     color: rgba(30, 41, 59, 0.8);
   }
 
@@ -167,29 +198,51 @@ const theme = weatherThemes[weather.weatherCode];
     padding: 20px;
   }
 
-  .weather-card[data-weather="sunny"] .metric-card {
+  .weather-card[data-weather="Clear"] .metric-card {
     background: rgba(254, 243, 199, 0.3);
     border: 1px solid rgba(251, 191, 36, 0.2);
   }
 
-  .weather-card[data-weather="snowy"] .metric-card {
+  .weather-card[data-weather="Snow"] .metric-card,
+  .weather-card[data-weather="Sleet"] .metric-card,
+  .weather-card[data-weather="Hail"] .metric-card {
     background: rgba(255, 255, 255, 0.3);
     border: 1px solid rgba(186, 230, 253, 0.3);
   }
 
-  .weather-card[data-weather="stormy"] .metric-card {
+  .weather-card[data-weather="Thunderstorm"] .metric-card {
     background: rgba(30, 27, 75, 0.4);
     border: 1px solid rgba(139, 92, 246, 0.2);
   }
 
-  .weather-card[data-weather="cloudy"] .metric-card {
+  .weather-card[data-weather="Cloudy"] .metric-card {
     background: rgba(51, 65, 85, 0.5);
     border: 1px solid rgba(100, 116, 139, 0.3);
   }
 
-  .weather-card[data-weather="foggy"] .metric-card {
+  .weather-card[data-weather="Fog"] .metric-card {
     background: rgba(107, 114, 128, 0.4);
     border: 1px solid rgba(156, 163, 175, 0.3);
+  }
+
+  .weather-card[data-weather="Haze"] .metric-card {
+    background: rgba(168, 162, 158, 0.3);
+    border: 1px solid rgba(120, 113, 108, 0.3);
+  }
+
+  .weather-card[data-weather="Dust"] .metric-card {
+    background: rgba(217, 119, 6, 0.3);
+    border: 1px solid rgba(180, 83, 9, 0.2);
+  }
+
+  .weather-card[data-weather="Shower"] .metric-card {
+    background: rgba(3, 105, 161, 0.3);
+    border: 1px solid rgba(7, 89, 133, 0.3);
+  }
+
+  .weather-card[data-weather="Drizzle"] .metric-card {
+    background: rgba(51, 65, 85, 0.6);
+    border: 1px solid rgba(71, 85, 105, 0.3);
   }
 
   .metric-header {
@@ -205,9 +258,16 @@ const theme = weatherThemes[weather.weatherCode];
     color: rgba(148, 163, 184, 0.8);
   }
 
-  .weather-card[data-weather="sunny"] .metric-icon,
-  .weather-card[data-weather="snowy"] .metric-icon {
+  .weather-card[data-weather="Clear"] .metric-icon,
+  .weather-card[data-weather="Snow"] .metric-icon,
+  .weather-card[data-weather="Sleet"] .metric-icon,
+  .weather-card[data-weather="Hail"] .metric-icon,
+  .weather-card[data-weather="Dust"] .metric-icon {
     color: rgba(71, 85, 105, 0.8);
+  }
+
+  .weather-card[data-weather="Shower"] .metric-icon {
+    color: rgba(186, 230, 253, 0.8);
   }
 
   .metric-label {
@@ -218,9 +278,16 @@ const theme = weatherThemes[weather.weatherCode];
     text-transform: uppercase;
   }
 
-  .weather-card[data-weather="sunny"] .metric-label,
-  .weather-card[data-weather="snowy"] .metric-label {
+  .weather-card[data-weather="Clear"] .metric-label,
+  .weather-card[data-weather="Snow"] .metric-label,
+  .weather-card[data-weather="Sleet"] .metric-label,
+  .weather-card[data-weather="Hail"] .metric-label,
+  .weather-card[data-weather="Dust"] .metric-label {
     color: rgba(71, 85, 105, 0.8);
+  }
+
+  .weather-card[data-weather="Shower"] .metric-label {
+    color: rgba(186, 230, 253, 0.85);
   }
 
   .metric-value {
@@ -230,8 +297,11 @@ const theme = weatherThemes[weather.weatherCode];
     letter-spacing: -0.5px;
   }
 
-  .weather-card[data-weather="sunny"] .metric-value,
-  .weather-card[data-weather="snowy"] .metric-value {
+  .weather-card[data-weather="Clear"] .metric-value,
+  .weather-card[data-weather="Snow"] .metric-value,
+  .weather-card[data-weather="Sleet"] .metric-value,
+  .weather-card[data-weather="Hail"] .metric-value,
+  .weather-card[data-weather="Dust"] .metric-value {
     color: rgba(15, 23, 42, 0.95);
   }
 

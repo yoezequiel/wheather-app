@@ -1,0 +1,15 @@
+export enum WeatherCategory {
+    CLEAR_SKY = "Clear",
+    CLOUDY = "Cloudy",
+    FOG = "Fog",
+    HAZE = "Haze",
+    DRIZZLE = "Drizzle",
+    RAIN = "Rain",
+    SNOW = "Snow",
+    SHOWER = "Shower",
+    SLEET = "Sleet",
+    THUNDERSTORM = "Thunderstorm",
+    HAIL = "Hail",
+    DUST = "Dust",
+    UNKNOWN = "Unknown",
+};

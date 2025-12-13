@@ -3,7 +3,6 @@ import { mapWmoCodeToSimpleEnglish } from "../helpers/wmoToSimpleCode";
 import { getCoordinatesByIpAdrress, type ApiResponseSchema as IPApiResponse } from "./ip";
 import { fetchWeatherApi } from "openmeteo";
 import cache from "./cache";
-import { atom } from "nanostores";
 
 export interface WeatherData {
     location: string;
@@ -15,8 +14,6 @@ export interface WeatherData {
 }
 
 const WEATHER_URL = "https://api.open-meteo.com/v1/forecast";
-
-const $data = atom<WeatherData & { createdAt: string } | undefined>();
 
 function getParams(user: IPApiResponse) {
     return {
@@ -41,25 +38,6 @@ async function getUser(ip: string): Promise<IPApiResponse> {
 
 export async function getWeatherData(ip: string): Promise<WeatherData> {
 
-    const old_data = $data.get();
-
-    if (old_data) {
-        const createdAt = new Date(old_data.createdAt).getTime();
-        const now = Date.now();
-        const threeMinutes = 3 * 60 * 1000; // 3 minutes in milliseconds
-
-        if (now - createdAt < threeMinutes) {
-            return {
-                location: old_data.location,
-                temperature: old_data.temperature,
-                weather: old_data.weather,
-                humidity: old_data.humidity,
-                wind: old_data.wind,
-                rain: old_data.rain,
-            };
-        }
-    }
-
     const user = await getUser(ip);
 
     const params = getParams(user);
@@ -76,8 +54,6 @@ export async function getWeatherData(ip: string): Promise<WeatherData> {
         wind: response.variables(2)!.value(),
         rain: response.variables(4)!.value(),
     };
-
-    $data.set({ ...newData, createdAt: new Date().toISOString() });
 
     return newData;
 }

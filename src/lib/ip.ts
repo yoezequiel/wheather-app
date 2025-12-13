@@ -20,7 +20,7 @@ const apiResponseSchema = z.object({
     timezone: z.string().nonempty()
 });
 
-type ApiResponseSchema = z.infer<typeof apiResponseSchema>;
+export type ApiResponseSchema = z.infer<typeof apiResponseSchema>;
 
 export async function getCoordinatesByIpAdrress(ip: string): Promise<ApiResponseSchema> {
     if (isIP(ip) == 0) throw new InvalidIpAddress(ip);
